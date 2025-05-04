@@ -1,19 +1,47 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { CreateNoteDto } from './dto/create-note.dto';
 import { UpdateNoteDto } from './dto/update-note.dto';
+import { PrismaService } from 'src/prisma/prisma.service';
+import { log } from 'node:console';
 
+const MAX_DOCUMENTS = 100;
 @Injectable()
-export class NotesService {
+export class NotesService extends PrismaService {
+  constructor(private prisma: PrismaService) {
+    super();
+  }
+
   create(createNoteDto: CreateNoteDto) {
-    return 'This action adds a new note';
+    return this.prisma.note.create({
+      data: createNoteDto,
+    });
   }
 
   findAll() {
-    return `This action returns all notes`;
+    return this.prisma.note.findMany({ take: MAX_DOCUMENTS });
+  }
+
+  findAllPublished() {
+    return this.prisma.note.findMany({
+      where: { published: true },
+      take: MAX_DOCUMENTS,
+      skip: 0,
+    });
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} note`;
+    log('????', id);
+    return this.prisma.note.findUnique({ where: { id } });
+  }
+
+  findDrafts() {
+    return this.prisma.note.findMany({
+      where: {
+        published: false,
+      },
+      take: MAX_DOCUMENTS,
+      skip: 0,
+    });
   }
 
   update(id: number, updateNoteDto: UpdateNoteDto) {

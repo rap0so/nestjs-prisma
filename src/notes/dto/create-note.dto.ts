@@ -1,1 +1,15 @@
-export class CreateNoteDto {}
+import { ApiProperty } from '@nestjs/swagger';
+
+export class CreateNoteDto {
+  @ApiProperty()
+  title: string;
+
+  @ApiProperty()
+  description?: string;
+
+  @ApiProperty()
+  body: string;
+
+  @ApiProperty({ required: false, default: false })
+  published?: boolean = false;
+}
