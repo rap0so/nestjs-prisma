@@ -1,8 +1,7 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { CreateNoteDto } from './dto/create-note.dto';
 import { UpdateNoteDto } from './dto/update-note.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { log } from 'node:console';
 
 const MAX_DOCUMENTS = 100;
 @Injectable()
@@ -30,8 +29,7 @@ export class NotesService extends PrismaService {
   }
 
   findOne(id: number) {
-    log('????', id);
-    return this.prisma.note.findUnique({ where: { id } });
+    return this.prisma.note.findUniqueOrThrow({ where: { id } });
   }
 
   findDrafts() {
