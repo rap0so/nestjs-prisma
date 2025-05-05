@@ -45,10 +45,19 @@ export class NotesService extends PrismaService {
   }
 
   update(id: number, updateNoteDto: UpdateNoteDto) {
-    return `This action updates a #${id} note`;
+    return this.note.update({
+      where: { id },
+      data: updateNoteDto,
+    });
   }
 
   remove(id: number) {
-    return `This action removes a #${id} note`;
+    /* 
+     I usually prefer NOT to delete items like this, but instead set a "deleted: true" property 
+     so I can retrieve in case something goes wrong
+    */
+    return this.note.delete({
+      where: { id },
+    });
   }
 }
