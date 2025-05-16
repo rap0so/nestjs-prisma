@@ -10,26 +10,25 @@ export class UsersService extends PrismaService {
   }
 
   create(createUserDto: CreateUserDto) {
-    this.prisma.user.create({
+    return this.prisma.user.create({
       data: createUserDto,
     });
-
-    return 'This action adds a new user';
   }
 
   findAll() {
-    return `This action returns all users`;
+    // TODO:  this.prisma.user.findMany({ where: { active: true /** or disabled: false */ }});
+    return this.prisma.user.findMany();
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} user`;
+    return this.prisma.user.findUniqueOrThrow({ where: { id } });
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+    return this.prisma.user.update({ where: { id }, data: updateUserDto });
   }
 
   remove(id: number) {
-    return `This action removes a #${id} user`;
+    return this.user.delete({ where: { id } });
   }
 }
