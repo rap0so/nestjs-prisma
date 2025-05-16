@@ -21,46 +21,53 @@ export class NotesController {
 
   @Post()
   @ApiCreatedResponse({ type: Note })
-  create(@Body() createNoteDto: CreateNoteDto) {
-    return this.notesService.create(createNoteDto);
+  async create(@Body() createNoteDto: CreateNoteDto) {
+    const result = await this.notesService.create(createNoteDto);
+    return new Note(result);
   }
 
   @Get()
   @ApiOkResponse({ type: Note, isArray: true })
-  findAll() {
-    return this.notesService.findAll();
+  async findAll() {
+    const notes = await this.notesService.findAll();
+    return notes.map((note) => new Note(note));
   }
 
   @Get('published')
   @ApiOkResponse({ type: Note, isArray: true })
-  findPublished() {
-    return this.notesService.findAllPublished();
+  async findPublished() {
+    const notes = await this.notesService.findAllPublished();
+    return notes.map((note) => new Note(note));
   }
 
   @Get('draft')
   @ApiOkResponse({ type: Note, isArray: true })
-  findDrafts() {
-    return this.notesService.findDrafts();
+  async findDrafts() {
+    const notes = await this.notesService.findDrafts();
+    return notes.map((note) => new Note(note));
   }
 
   @Get(':id')
   @ApiOkResponse({ type: Note })
-  findOne(@Param('id', ParseIntPipe) id: number) {
-    return this.notesService.findOne(id);
+  async findOne(@Param('id', ParseIntPipe) id: number) {
+    const result = await this.notesService.findOne(id);
+    return new Note(result);
   }
 
   @Patch(':id')
   @ApiOkResponse({ type: Note })
-  update(
+  async update(
     @Param('id', ParseIntPipe) id: number,
     @Body() updateNoteDto: UpdateNoteDto,
   ) {
-    return this.notesService.update(id, updateNoteDto);
+    const result = await this.notesService.update(id, updateNoteDto);
+    return new Note(result);
   }
 
   @Delete(':id')
   @ApiOkResponse({ type: Note })
-  remove(@Param('id', ParseIntPipe) id: number) {
-    return this.notesService.remove(id);
+  async remove(@Param('id', ParseIntPipe) id: number) {
+    const result = await this.notesService.remove(id);
+    return new Note(result);
   }
 }

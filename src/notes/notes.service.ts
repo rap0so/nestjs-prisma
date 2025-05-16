@@ -29,7 +29,12 @@ export class NotesService extends PrismaService {
   }
 
   findOne(id: number) {
-    return this.prisma.note.findUniqueOrThrow({ where: { id } });
+    return this.prisma.note.findUniqueOrThrow({
+      where: { id },
+      include: {
+        author: true,
+      },
+    });
   }
 
   findDrafts() {
