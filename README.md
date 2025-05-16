@@ -35,10 +35,21 @@ $ yarn install
 $ yarn run start
 
 # watch mode
+# Swagger will be running on /api
 $ yarn run start:dev
 
 # production mode
 $ yarn run start:prod
+```
+
+## DB related
+
+```bash
+# apply migrations, generate Prisma Client and seed the database
+npx prisma migrate dev
+
+# seed
+npx prisma db seed
 ```
 
 ## Run tests
