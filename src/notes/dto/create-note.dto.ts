@@ -9,6 +9,9 @@ import {
 } from 'class-validator';
 
 export class CreateNoteDto {
+  @ApiProperty()
+  id: number;
+
   @IsString()
   @IsNotEmpty()
   @MinLength(5)
@@ -18,7 +21,7 @@ export class CreateNoteDto {
   @IsString()
   @MaxLength(300)
   @ApiProperty({ required: false })
-  description?: string;
+  description: string | null;
 
   @IsString()
   @IsNotEmpty()
@@ -28,5 +31,8 @@ export class CreateNoteDto {
   @IsBoolean()
   @IsOptional()
   @ApiProperty({ required: false, default: false })
-  published?: boolean = false;
+  published: boolean = false;
+
+  @ApiProperty({ required: false, nullable: true })
+  authorId: number | null;
 }

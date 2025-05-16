@@ -3,7 +3,7 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
 const setupSwagger = (app: INestApplication) => {
   const swaggerConfig = new DocumentBuilder()
-    .setTitle('Prisma Api')
+    .setTitle('Notes Api with Prisma')
     .setDescription('First Nestjs API with Prisma')
     .setVersion('1.0.0')
     .build();
