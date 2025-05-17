@@ -6,6 +6,7 @@ const setupSwagger = (app: INestApplication) => {
     .setTitle('Notes Api with Prisma')
     .setDescription('First Nestjs API with Prisma')
     .setVersion('1.0.0')
+    .addBearerAuth()
     .build();
 
   const swaggerDoc = SwaggerModule.createDocument(app, swaggerConfig);
