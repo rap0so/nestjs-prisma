@@ -11,7 +11,9 @@ export class Login {
     minLength: 8,
     minNumbers: 1,
     minUppercase: 1,
+    minSymbols: 0,
   })
   @IsNotEmpty()
+  @ApiProperty()
   password: string;
 }

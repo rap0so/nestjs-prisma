@@ -3,12 +3,11 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 async function main() {
-  // create an dummy author
   const user1 = await prisma.user.upsert({
     where: { login: 'dummy' },
     update: {},
     create: {
-      login: 'dummy',
+      login: 'dummy@dummy.com',
       name: 'Dummy',
       password: '123456',
     },
@@ -18,7 +17,7 @@ async function main() {
     where: { login: 'dummier' },
     update: {},
     create: {
-      login: 'dummier',
+      login: 'dummier@dummier.com',
       name: 'Dummier',
       password: '123456',
     },
