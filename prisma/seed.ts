@@ -5,11 +5,11 @@ const prisma = new PrismaClient();
 const roundsOfHashing = 10;
 
 async function main() {
-  const password = await hash('123456', roundsOfHashing);
+  const password = await hash('Password123', roundsOfHashing);
 
   const user1 = await prisma.user.upsert({
-    where: { login: 'dummy' },
-    update: {},
+    where: { login: 'dummy@dummy.com' },
+    update: { password },
     create: {
       login: 'dummy@dummy.com',
       name: 'Dummy',
@@ -18,8 +18,8 @@ async function main() {
   });
 
   const user2 = await prisma.user.upsert({
-    where: { login: 'dummier' },
-    update: {},
+    where: { login: 'dummier@dummier.com' },
+    update: { password },
     create: {
       login: 'dummier@dummier.com',
       name: 'Dummier',
@@ -53,7 +53,7 @@ async function main() {
     },
   });
 
-  console.log({ post1, post2 });
+  console.log({ user1, user2, post1, post2 });
 }
 
 main()
