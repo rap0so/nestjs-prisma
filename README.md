@@ -10,7 +10,7 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) backend REST API for a blog application, with NestJS, Prisma, PostgreSQL and Swagger
+[Nest](https://github.com/nestjs/nest) backend REST API for a notes application, with NestJS, Prisma, PostgreSQL and Swagger
 
 ## Techs
 
