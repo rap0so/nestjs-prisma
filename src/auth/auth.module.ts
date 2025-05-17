@@ -4,6 +4,8 @@ import { AuthController } from './auth.controller';
 import { PrismaModule } from 'src/prisma/prisma.module';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
+import { UsersModule } from 'src/users/users.module';
+import { JWTStrategy } from 'src/auth/jwt.strategy';
 
 const secret = process.env.JWT_SECRET!;
 if (!secret) {
@@ -18,8 +20,9 @@ if (!secret) {
       secret,
       signOptions: { expiresIn: '10m' },
     }),
+    UsersModule,
   ],
   controllers: [AuthController],
-  providers: [AuthService],
+  providers: [AuthService, JWTStrategy],
 })
 export class AuthModule {}
